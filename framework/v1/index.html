@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 应用框架写法</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .error-tips{
+            color: red;
+        }
+        .form-item{
+            line-height: 34px;
+        }
+        .form-item label:first-child{
+            width: 110px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-box" id="app">
+        <div class="form-item">
+            <label for="">用户名</label>
+            <input type="text" :value="saveData['username']" @input="updateData('username', $event.currentTarget.value)">
+            <span class="error-tips" >{{ errorTips['username'] }}</span>
+        </div>
+        <div class="form-item">
+            <label for="">密 码</label>
+            <input type="text" :value="saveData['password']" @input="updateData('password', $event.currentTarget.value)">
+            <span class="error-tips" >{{ errorTips['password'] }}</span>
+        </div>
+        <div class="form-item">
+            <label for="">确认密码</label>
+            <input type="text" :value="saveData['rePassword']" @input="updateData('rePassword', $event.currentTarget.value)">
+            <span class="error-tips" >{{ errorTips['rePassword'] }}</span>
+        </div>
+        <div class="form-item">
+            <label for="">性别</label>
+            <label v-for="sex in groupSex"><input name="sex" type="radio" :checked="sex.radioVal === saveData.sex" :value="sex.radioVal">{{ sex.raidoText }}</label>
+        </div>
+        <div class="form-item">
+            <label for="">领取物品</label>
+            <select @change="updateData('clothes', parseInt($event.currentTarget.value))">
+                <option  v-for="cloth in groupClothes" :value="cloth.optionVal" >{{ cloth.optionText }}</option>
+            </select>
+            <span class="error-tips" >{{ errorTips['clothes'] }}</span>
+        </div>
+        <div class="form-item">
+            <button @click="save">保  存</button>
+        </div>
+    </div>
+    <script src="vue-framework.js"></script>
+</body>
+</html>
